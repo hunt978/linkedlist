@@ -13,14 +13,13 @@ There are 4 strains for the overall container:
 
 Please implement **2** methods based on your choice between C++ or C in **60** minutes.
 
+**NOTE** online test **SHOULD** complete both C++ and C project.
+
 **DONOT** alter given declaration or function prototype, while adding necessary helpers are allowed.
 
 ### Reference
 
-* [cppreference](http://docs.sstc.org/lang/)
-* [cppreference_zh](http://docs.sstc.org/lang_zh/)
-* [CMake](http://docs.sstc.org/cmake/) *put build cache into %root%/build folder*
-* [Github/Gitea](http://docs.sstc.org/github/)
+* cppreference
 
 ## CPP
 
