@@ -13,9 +13,12 @@ There are 4 strains for the overall container:
 
 Please implement **2** methods based on your choice between C++ or C in **60** minutes.
 
-**NOTE** online test **SHOULD** complete both C++ and C project.
-
 **DONOT** alter given declaration or function prototype, while adding necessary helpers are allowed.
+
+### Online Test
+
+1) should complete both C++ and C project;
+2) folk the project, and push the result to your remote repository;
 
 ### Reference
 
