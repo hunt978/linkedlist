@@ -18,7 +18,7 @@ Please implement **2** methods based on your choice between C++ or C in **60** m
 ### Online Test
 
 1) should complete both C++ and C project;
-2) folk the project, and push the result to your remote repository;
+2) <del>folk the project, and push the result to your remote repository;</del>>
 
 ### Reference
 
