@@ -1,78 +1,52 @@
-# Linked List
+# 链表容器
 
-## Question
+## 问题描述
 
-There are sets of from & to relationship elements stored in a container. Let's say they are `fid` and `tid` who are represented in the form of `fid->tid`.
+设某容器中存储着一系列表达指向关系的节点，其中：`fid`代表出发节点，`tid`代表到达节点，指向表达为`fid->tid`。
 
-There are 4 strains for the overall container:
-
-1) `fid` and `tid` **CANNOT** be the same, and
-2) it should **NOT** hold duplicated node, neither
-3) it should **NOT** hold circled link, and at last
-4) fan-out is allowed while fan-in is **NOT**.
-
-Please implement **2** methods based on your choice between C++ or C in **60** minutes.
-
-**DONOT** alter given declaration or function prototype, while adding necessary helpers are allowed.
-
-### Online Test
-
-1) should complete both C++ and C project;
-2) folk the project, and push the result to your remote repository;
-
-### Reference
-
-* cppreference
-
-## CPP
-
-### Declaration
-
-```cpp
-struct Node{
-  std::string fid;
-  std::string tid;
+```c
+struct Node {
+  uint32_t fid;
+  uint32_t tid;
+  ... 
 };
 ```
 
-```cpp
-std::vector<Node> nodes;
-```
+> 说明1
+> 
+> * fid/tid **并非** 用于表示节点序号 
 
-### Prototype
+于是，这一容器可以用来存储多个节点所构成的复杂指向信息。针对这一容器，有以下 **4** 项约束条件:
 
-```cpp
-/**
- * @brief      insert a new pair into the list
- *
- *             there are 4 strains for the container :
- *
- *               1) `fid` and `tid` **CANNOT** be the same
- *               2) it should **NOT** hold duplicated node
- *               3) it should **NOT** hold circled link
- *               4) fan-out is allowed while fan-in is **NOT**.
- *
- * @param      nodes  The nodes
- * @param[in]  fid    The fid
- * @param[in]  tid    The tid
- *
- * @return     success with true returned
- */
-bool insert(
-  std::vector<Node>& nodes, const std::string& fid, const std::string& tid);
+1. `Rule1` 节点禁止保存自指向关系，即`fid` 与 `tid` **不能** 相同；
+2. `Rule2` 容器 **禁止保存重复** 指向关系节点；
+3. `Rule3` 容器中指向关系节点所构成的指向信息 **禁止闭合成环** ；
+4. `Rule4` 容器中指向关系节点所构成的指向信息 **允许扇出** ，**禁止扇入** 。
 
-/**
- * @brief      sort nodes
- *
- * @param      nodes   The nodes
- * @param[in]  accend  The accend
- */
-void sort(std::vector<Node>& nodes, bool accend);
-```
+> 说明2
+> 
+> * 若已有3个指向关系节点`1->2`,`2->3`,`3->4`存在于容器中时，则不允许新节点`4->1`加入容器，否则将出现闭合环，；
+> * 扇出指“一指多”，扇入指“多指一”，即容器可以保存`1->2`,`1->3`，但不允许保存`1->3`,`2->3`。
 
-## C
+## 作答要求
 
-### Declaration
+请在 **60分钟** 内挑选`C`或者`C++`实现所要求的的函数/方法。请注意：
+
+1. 不允许更改已给出的任何结构定义、函数声明等内容；
+2. 仅允许使用`stdc`或`stl`，禁止使用任何其他第三方库；
+3. 允许添加必要的子函数；
+4.  **在线作答必须完成`C`版本** ，有余力者尽量完成`C++`版本。
+
+### 参考资料
+
+* [C 参考手册](https://zh.cppreference.com/w/c)
+* [C++ 参考手册](https://zh.cppreference.com/w/cpp)
+
+## 原型声明
+
+### C版本
+
+完成`insert_node`与`remove_node` **2** 个函数。
 
 ```c
 struct Node {
@@ -82,15 +56,7 @@ struct Node {
   struct Node* prev;
   struct Node* next;
 };
-```
 
-```c
-struct Node* head;
-```
-
-### Prototype
-
-```c
 /**
  * @brief      insert a node into list
  *
@@ -120,3 +86,42 @@ struct Node* insert_node(struct Node* head, uint32_t fid, uint32_t tid);
  */
 struct Node* remove_node(struct Node* head, uint32_t fid, uint32_t tid);
 ```
+
+### C++版本
+
+完成`insert`与`sort` **2** 个函数。
+
+```cpp
+struct Node{
+  std::string fid;
+  std::string tid;
+};
+
+/**
+ * @brief      insert a new pair into the list
+ *
+ *             there are 4 strains for the container :
+ *
+ *               1) `fid` and `tid` **CANNOT** be the same
+ *               2) it should **NOT** hold duplicated node
+ *               3) it should **NOT** hold circled link
+ *               4) fan-out is allowed while fan-in is **NOT**.
+ *
+ * @param      nodes  The nodes
+ * @param[in]  fid    The fid
+ * @param[in]  tid    The tid
+ *
+ * @return     success with true returned
+ */
+bool insert(
+  std::vector<Node>& nodes, const std::string& fid, const std::string& tid);
+
+/**
+ * @brief      sort nodes
+ *
+ * @param      nodes   The nodes
+ * @param[in]  accend  The accend
+ */
+void sort(std::vector<Node>& nodes, bool accend);
+```
+
